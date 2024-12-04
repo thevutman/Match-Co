@@ -1,7 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { useRouter } from 'expo-router';
 
 const App = () => {
+  const router = useRouter()
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
@@ -15,10 +17,10 @@ const App = () => {
         CREA CUENTA
       </Text>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={() => router.push('inicioSesion')}>
           <Text style={styles.buttonText}>INICIAR SESION</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={() => router.push('registrarse')}>
           <Text style={styles.buttonText}>CREAR CUENTA</Text>
         </TouchableOpacity>
       </View>
