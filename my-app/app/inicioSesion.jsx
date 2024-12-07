@@ -1,16 +1,32 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { View, Text, TextInput, Button, StyleSheet, Pressable, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { supabase } from '../lib/supabase';
+import { useRouter } from 'expo-router';
 
 const LoginScreen = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const router = useRouter()
+  const emailRef = useRef("");
+  const passwordRef = useRef("");
+  
 
-  const handleLogin = () => {
-    // Aquí va la lógica de inicio de sesión
-    console.log('Email:', email);
-    console.log('Password:', password);
-  };
+  const handleLogin = async () => {
+      if(!emailRef.current || !passwordRef.current){
+        Alert.alert('Inicia Sesion', 'Llena todos los campos')
+        return;
+      }
+      let email = emailRef.current.trim();
+      let password = passwordRef.current.trim();
+      const {error} = await supabase.auth.signInWithPassword({
+        email,
+        password
+      });
+
+      console.log('error: ', error);
+      if (error){
+        Alert.alert('Inicio Sesion', error.message);
+      }
+  }
 
   return (
     <View style={styles.container}>
@@ -27,8 +43,7 @@ const LoginScreen = () => {
           <TextInput
             style={styles.input}
             placeholder="Correo"
-            value={email}
-            onChangeText={setEmail}
+            onChangeText={value => emailRef.current = value}
           />
         </View>
         <View style={styles.inputContainer}>
@@ -36,14 +51,19 @@ const LoginScreen = () => {
           <TextInput
             style={styles.input}
             placeholder="Contraseña"
-            //secureTextEntry={true}
-            value={password}
-            onChangeText={setPassword}
+            onChangeText={value => passwordRef.current = value}
+            secureTextEntry
           />
         </View>
         <Button title="CONTINUAR" onPress={handleLogin} style={styles.button} />
-        <Text style={styles.forgotPassword}>Olvidaste tu Contraseña</Text>
-      </View>
+        </View>
+        //FOOTER
+        <View backgroundColor = "blue">
+        <Text style={styles.forgotPassword}>¿Olvidaste tu Contraseña?</Text>
+        <Pressable onPress={() => router.push('recuperarContraseña')}>
+        <Text style={styles.forgotPassword}>Recuperala</Text>
+        </Pressable>
+        </View>
     </View>
   );
 };
@@ -81,6 +101,9 @@ const styles = StyleSheet.create({
     flex: 1,
     color: '#000',
   },
+  forgotPassword:{
+    backgroundColor: '#fff',
+  }
 });
 
 export default LoginScreen;
