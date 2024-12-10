@@ -5,6 +5,6 @@ const{width: deviceWidth, height: deviceHeight} = Dimension.get('window');
 const hp = porcentage => {
     return (percentage*deviceHeight) /100;
 }
-const wp = porcentage => {
+export const wp = porcentage => {
     return (percentage*deviceWidth) /100;
 }
