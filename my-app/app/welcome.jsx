@@ -3,7 +3,7 @@ import React from 'react'
 import ScreenWrapper from '@/components/ScreenWrapper'
 import { hp, wp } from '../helpers/common'
 import { StatusBar } from 'expo-status-bar'
-/*import { theme } from '@/constants/theme'*/
+import { theme } from '@/constants/theme'
 import Button from '@/components/Button'
 
 const welcome = () => {
@@ -25,7 +25,7 @@ const welcome = () => {
          {/* footer */}
          <View style={styles.footer}>
             <Button
-                tittle="Getting Started"
+                title="Getting Started"
                 buttonStyle={{marginHorizontal: wp(3)}}
                 onPress={()=>{}}
             />
@@ -61,10 +61,10 @@ const styles = StyleSheet.create({
 
   },
   tittle:{
-      /*color: theme.colors.text,*/
+      color: theme.colors.text,
       fontSize: hp(4),
       textAlign: 'center',
-      /*fontWeight: theme.fonts.extraBold*/
+      fontWeight: theme.fonts.extraBold
 
 
   },
@@ -72,12 +72,10 @@ const styles = StyleSheet.create({
       textAlign:'center',
       paddingHorizontal:wp(10),
       fontSize:hp(1.7),
-      /*color:theme.colors.text*/
+      color:theme.colors.text
   },
   footer: {
     gap: 30,
     width: '100%'
   }
-
-  
 })
