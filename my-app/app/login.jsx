@@ -2,19 +2,20 @@ import { Alert, Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { useRef, useState } from 'react'
 import ScreenWrapper from '@/components/ScreenWrapper'
 import {theme} from '../constants/theme'
-import { Button, Icon } from '@rneui/themed'
+import { Icon } from '@rneui/themed'
 import { StatusBar } from 'expo-status-bar'
 import BackButton from '@/components/BackButton'
 import { useRouter } from 'expo-router'
 import { hp, wp } from '@/helpers/common'
 import Input from '@/components/Input'
+import Button from '@/components/Button'
 
 
 const Login = () => {
     const router = useRouter();
     const emailRef= useRef("");
     const passwordRef = useRef("");
-    const [loding, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const onSubmit = async ()=>{
       if(!emailRef.current || !passwordRef.current){
@@ -56,7 +57,7 @@ const Login = () => {
               <Text style={styles.forgotPassword}>
                 Forgot Password?
                </Text>
-               {/*button*/}
+             
                <Button title={'Login'} loading={loading} onPress={onSubmit} /> 
         </View>
 

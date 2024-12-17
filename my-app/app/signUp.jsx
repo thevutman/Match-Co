@@ -2,12 +2,13 @@ import { Alert, Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { useRef, useState } from 'react'
 import ScreenWrapper from '@/components/ScreenWrapper'
 import {theme} from '../constants/theme'
-import { Button, Icon } from '@rneui/themed'
+import { Icon } from '@rneui/themed'
 import { StatusBar } from 'expo-status-bar'
 import BackButton from '@/components/BackButton'
 import { useRouter } from 'expo-router'
 import { hp, wp } from '@/helpers/common'
 import Input from '@/components/Input'
+import Button from '@/components/Button'
 
 
 const signUp = () => {
@@ -43,7 +44,7 @@ const signUp = () => {
               Please fill the details to create an account
             </Text>
             <Input
-              icon={<Icon name="user" size={26} strokeWidth={1.6}/>}
+              icon={<Icon name="people" size={26} strokeWidth={1.6}/>}
               placeholder='Enter your name'
               onChangeText={value=> nameRef.current = value}
              />
@@ -61,7 +62,7 @@ const signUp = () => {
 
       
                {/*button*/}
-               <Button title={'Sign up'} loading={loading} onPress={onSubmit} /> 
+               <Button title={'Sign up'} loading={loding} onPress={onSubmit} /> 
         </View>
 
         {/*footer*/}
