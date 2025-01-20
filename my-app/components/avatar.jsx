@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { Image } from 'expo-image';
 import {getUserImageSrc} from '../services/imageService';
+import { theme } from '@/constants/theme';
 
 const avatar = ({
     uri, 
