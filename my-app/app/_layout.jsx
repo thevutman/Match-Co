@@ -3,11 +3,13 @@ import React, { useEffect } from 'react'
 import { Stack, useRouter } from 'expo-router'
 import { AuthProvider, useAuth } from '../context/AuthContext'
 import { supabase } from '@/lib/supabase'
+import FetchUbis from '../components/fetchUbicaciones'
 
 const _layout = () => {
   return (
     <AuthProvider>
       <MainLayout />
+      <FetchUbis></FetchUbis>
     </AuthProvider>
   )
 }
@@ -24,7 +26,7 @@ const MainLayout = () => {
       if(session){
         setAuth(session?.user);
         // updateUserData(session?.user, session?.user?.email);
-        router.replace('/home');
+        router.replace('/homes');
       }
       else{
         setAuth(null);
