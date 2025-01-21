@@ -13,10 +13,10 @@ const welcome = () => {
     <ScreenWrapper bg="white">
       <StatusBar style = "dark" />
       <View style = {styles.container}>
-        {/*welcome image*/}
+
         <Image style={styles.welcomeImage} resizeMode='contain' source={require('../assets/images/welcome.png')} />
 
-         {/*tittle*/} 
+
          <View style={{gap:20}}>
             <Text style= {styles.tittle}>LinkUp !</Text>
             <Text style= {styles.punchline}>
@@ -24,7 +24,7 @@ const welcome = () => {
             </Text>
          </View>
 
-         {/* footer */}
+
          <View style={styles.footer}>
             <Button
                 title="Getting Started"
