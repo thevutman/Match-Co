@@ -3,7 +3,7 @@ import React from 'react';
 import ScreenWrapper from "@/components/ScreenWrapper";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/lib/supabase";
-import header from "@/components/header";
+import {header} from "@/components/Header";
 import { theme } from "@/constants/theme";
 import Icon from "../../assets/icons";
 import { wp, hp } from "@/helpers/common";
@@ -27,7 +27,7 @@ const Home = () => {
   }
 
   return(
-    <ScreenWrapper>
+    <ScreenWrapper bg="White">
       <View style={styles.container}>
           {/* header */}
           <View style={styles.header}>
@@ -40,7 +40,12 @@ const Home = () => {
                 <Icon name="plus" size={hp(3.2)} strokeWidth={2} color={theme.colors.text}/>
               </Pressable>
               <Pressable  onPress={()=> router.push('profile')}>
-                <Avatar></Avatar>
+                <Avatar
+                  uri={user?.image}
+                  size={hp(4.3)}
+                  rounded={theme.radius.sm}
+                  style={{borderWidth:2}}
+                />
               </Pressable>
             </View>
           </View>
