@@ -60,14 +60,26 @@
 
 // export default MapScreen;
 
-import { StyleSheet, View } from 'react-native'
-import MapView, { PROVIDER_GOOGLE } from'react-native-maps'
+import { StyleSheet, Text, View } from 'react-native'
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import React from 'react'
 
 const homes = () => {
+  const fields = {
+    latitude: 37.33,
+    longitude: -122,
+    latitudeDelta: 2,
+    longitudeDelta: 2,
+  }
   return (
     <View style={{flex: 1}}>
-      <MapView style={StyleSheet.absoluteFill} provider={PROVIDER_GOOGLE} />
+      <MapView 
+        style={StyleSheet.absoluteFill}
+        provider={PROVIDER_GOOGLE}
+        initialRegion={fields}
+        showsUserLocation
+        showsMyLocationButton
+      />
     </View>
   )
 }
