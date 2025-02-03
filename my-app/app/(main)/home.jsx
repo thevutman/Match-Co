@@ -8,7 +8,7 @@ import { theme } from "@/constants/theme";
 import Icon from "../../assets/icons";
 import { wp, hp } from "@/helpers/common";
 import { useRoute } from "@react-navigation/native";
-import { Avatar } from "@rneui/themed";
+import  Avatar  from "@rneui/themed";
 
 
 const Home = () => {
@@ -18,13 +18,13 @@ const Home = () => {
 
   console.log('user: ', user);
 
-  const onLogout = async ()=>{
-    // setAuth(null);
-    const {error} = await supabase.auth.signOut();
-    if(error){
-      Alert.alert('Sign out', "Error signing out!")
-    }
-  }
+  // const onLogout = async ()=>{
+  //   // setAuth(null);
+  //   const {error} = await supabase.auth.signOut();
+  //   if(error){
+  //     Alert.alert('Sign out', "Error signing out!")
+  //   }
+  // }
 
   return(
     <ScreenWrapper bg="White">
@@ -40,18 +40,18 @@ const Home = () => {
                 <Icon name="plus" size={hp(3.2)} strokeWidth={2} color={theme.colors.text}/>
               </Pressable>
               <Pressable  onPress={()=> router.push('profile')}>
-                <Avatar
+                {/* <Avatar
                   uri={user?.image}
                   size={hp(4.3)}
                   rounded={theme.radius.sm}
                   style={{borderWidth:2}}
-                />
+                /> */}
               </Pressable>
             </View>
           </View>
       </View>
       
-      <Button title="logout" onPress={onLogout}/>
+      {/* <Button title="logout" onPress={onLogout}/> */}
     </ScreenWrapper>
   )
 

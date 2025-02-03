@@ -5,7 +5,8 @@ import BackButton from './BackButton'
 import { hp } from '@/helpers/common'
 import { theme } from '@/constants/theme'
 
-const header = ({title,showBackButton = false, mb=10}) => {
+const header = ({title,showBackButton = true, mb=10}) => {
+// const header = () => {
     const router = useRouter();
   return (
     <View style={[styles.container, {marginBottom: mb}]}>
@@ -38,5 +39,9 @@ const styles = StyleSheet.create({
         fontWeight: theme.fonts.semibold,
         color: theme.colors.textDark
 
+    },
+    BackButton: {
+        position: 'absolute',
+        left: 0
     }
 })
