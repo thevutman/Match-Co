@@ -1,76 +1,89 @@
-// import { StyleSheet, Text, View } from 'react-native'
-// import React from 'react'
+import { Alert,Button, StyleSheet,Text, View,Pressable } from "react-native"
+import React from 'react';
+import ScreenWrapper from "@/components/ScreenWrapper";
+import { useAuth } from "@/context/AuthContext";
+import { supabase } from "@/lib/supabase";
+import {header} from "@/components/Header";
+import { theme } from "@/constants/theme";
+import Icon from "../../assets/icons";
+import { wp, hp } from "@/helpers/common";
+import { useRoute } from "@react-navigation/native";
+import  Avatar  from "@rneui/themed";
 
-// const Home = () => {
-//   return (
-//     <View>
-//       <Text>Home</Text>
-//     </View>
-//   )
-// }
 
-// export default Home
+const Home = () => {
 
-// const styles = StyleSheet.create({})
+  const{user, setAuth} = useAuth();
+  const router = useRoute();
 
-import React, { useState, useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
+  console.log('user: ', user);
 
-const MapScreen = () => {
-  const [fields, setFields] = useState([
-    {
-      id: 1,
-      name: "Cancha 1",
-      latitude: 6.2442,
-      longitude: -75.5812,
-    },
-    {
-      id: 2,
-      name: "Cancha 2",
-      latitude: 6.2482,
-      longitude: -75.5632,
-    },
-  ]);
+  // const onLogout = async ()=>{
+  //   // setAuth(null);
+  //   const {error} = await supabase.auth.signOut();
+  //   if(error){
+  //     Alert.alert('Sign out', "Error signing out!")
+  //   }
+  // }
 
-  const initialRegion = {
-    latitude: 6.2442,
-    longitude: -75.5812,
-    latitudeDelta: 0.05,
-    longitudeDelta: 0.05,
-  };
+  return(
+    <ScreenWrapper bg="White">
+      <View style={styles.container}>
+          {/* header */}
+          <View style={styles.header}>
+            <Text style={styles.title}>LinkUp</Text>
+            <View style={styles.icons}>
+              <Pressable onPress={()=> router.push('notifcations')}>
+                <Icon name="heart" size={hp(3.2)} strokeWidth={2} color={theme.colors.text}/>
+              </Pressable>
+              <Pressable  onPress={()=> router.push('newPost')}>
+                <Icon name="plus" size={hp(3.2)} strokeWidth={2} color={theme.colors.text}/>
+              </Pressable>
+              <Pressable  onPress={()=> router.push('profile')}>
+                {/* <Avatar
+                  uri={user?.image}
+                  size={hp(4.3)}
+                  rounded={theme.radius.sm}
+                  style={{borderWidth:2}}
+                /> */}
+              </Pressable>
+            </View>
+          </View>
+      </View>
+      
+      {/* <Button title="logout" onPress={onLogout}/> */}
+    </ScreenWrapper>
+  )
 
-  return (
-    <View style={styles.container}>
-      <MapView
-        style={styles.map}
-        initialRegion={initialRegion}
-        showsUserLocation
-        showsMyLocationButton
-      >
-        {fields.map(field => (
-          <Marker
-            key={field.id}
-            coordinate={{
-              latitude: field.latitude,
-              longitude: field.longitude,
-            }}  
-            title={field.name}
-            description="Cancha disponible"
-          />
-        ))}
-      </MapView>
-    </View>
-  );
-};
+}
+
+export default Home
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex:1,
+    // paddingHorizontal: wp(4)
   },
-  map: {
-    flex: 1,
-  },
-});
 
-export default MapScreen;
+  header:{
+    flexDirection:'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 10,
+    marginHorizontal: wp(4)
+  },
+  title:{
+    color: theme.colors.text,
+    fontSize: hp(3.2),
+    fontWeight: theme.fonts.bold
+  },
+  avatarImage:{
+    height: hp(4.3),
+    width: hp(4.3),
+    borderRadius: theme.radius.sm,
+    bordercurve: 'continuous',
+    borderColor: theme.colors.gray,
+    borderWidth: 3
+  },
+
+})
