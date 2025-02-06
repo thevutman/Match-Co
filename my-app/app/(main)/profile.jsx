@@ -8,8 +8,8 @@ import{ hp, wp} from '../../helpers/common'
 // import Icon from '@/assets/icons'
 import { theme } from '@/constants/theme'
 import { supabase } from '@/lib/supabase'
-import Header from '../../components/Header'
-import Avatar from '@/components/Avatar'
+import Header from '../../components/header'
+import Avatar from '@/components/avatar'
 
 const Profile = () => {
     const {user,setAuth} = useAuth();
@@ -57,11 +57,11 @@ const UserHeader = ({user, router, handleLogout}) => {
             <View syle={styles.container}>
               <View style={{gap:15}}>
                 <View style={styles.avatarContainer}>
-                  {/* <Avatar
+                   <Avatar
                     uri={user?.image}
                     size={hp(12)}
                     rounded={theme.radius.xxl*1.4}
-                  /> */}
+                  /> 
                   <Pressable style={styles.editIcon} onPress={()=> router.push('editProfile')}>
                       <Icon name="edit" strokeWidth={2.5} size={20}/>
                   </Pressable>

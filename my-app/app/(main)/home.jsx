@@ -3,7 +3,7 @@ import React from 'react';
 import ScreenWrapper from "@/components/ScreenWrapper";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/lib/supabase";
-import {header} from "@/components/Header";
+import {header} from "@/components/header";
 import { theme } from "@/constants/theme";
 import Icon from "../../assets/icons";
 import { wp, hp } from "@/helpers/common";

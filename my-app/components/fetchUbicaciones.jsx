@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Text, StyleSheet } from 'react-native';
 import { supabase } from '../lib/supabase';
 
-const ExampleComponent = () => {
+const fetchUbis = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -36,4 +36,4 @@ const ExampleComponent = () => {
 
 const styles = StyleSheet.create({});
 
-export default ExampleComponent;
+export default fetchUbis;
