@@ -3,6 +3,7 @@ import React from 'react'
 import {hp} from "../helpers/common"
 import { theme } from "../constants/theme"
 import {Image} from 'expo-image'
+import {getUserImageSrc} from '../services/imageService';
 const Avatar = ({
     uri,
     size=hp(4.5),

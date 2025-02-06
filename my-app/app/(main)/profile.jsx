@@ -8,8 +8,8 @@ import{ hp, wp} from '../../helpers/common'
 // import Icon from '@/assets/icons'
 import { theme } from '@/constants/theme'
 import { supabase } from '@/lib/supabase'
-import Header from '../../components/Header'
-import Avatar from '@/components/Avatar'
+import Header from '../../components/header'
+import Avatar from '@/components/avatar'
 
 const Profile = () => {
     const {user,setAuth} = useAuth();

@@ -24,7 +24,7 @@ const MainLayout = () => {
       if(session){
         setAuth(session?.user);
         updateUserData(session?.user,session?.user?.email);
-        router.replace('/ubicacion');
+        router.replace('/homes');
       }
       else{
         setAuth(null);
