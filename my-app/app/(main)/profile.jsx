@@ -57,11 +57,11 @@ const UserHeader = ({user, router, handleLogout}) => {
             <View syle={styles.container}>
               <View style={{gap:15}}>
                 <View style={styles.avatarContainer}>
-                  {/* <Avatar
+                   <Avatar
                     uri={user?.image}
                     size={hp(12)}
                     rounded={theme.radius.xxl*1.4}
-                  /> */}
+                  /> 
                   <Pressable style={styles.editIcon} onPress={()=> router.push('editProfile')}>
                       <Icon name="edit" strokeWidth={2.5} size={20}/>
                   </Pressable>

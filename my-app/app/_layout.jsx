@@ -9,7 +9,6 @@ const _layout = () => {
   return (
     <AuthProvider>
       <MainLayout />
-      <FetchUbis></FetchUbis>
     </AuthProvider>
   )
 }
@@ -23,8 +22,8 @@ const MainLayout = () => {
 
       if(session){
         setAuth(session?.user);
-        updateUserData(session?.user,session?.user?.email);
-        router.replace('/homes');
+        // updateUserData(session?.user, session?.user?.email);
+        router.replace('/profile');
       }
       else{
         setAuth(null);
