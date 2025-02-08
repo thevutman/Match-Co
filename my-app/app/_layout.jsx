@@ -18,11 +18,11 @@ const MainLayout = () => {
  const router =useRouter();
   useEffect(() => {
     supabase.auth.onAuthStateChange((_event, session) => {
-      // console.log('session user: ', session?.user?.id);
+      console.log('session user: ', session?.user?.id);
 
       if(session){
         setAuth(session?.user);
-        // updateUserData(session?.user, session?.user?.email);
+        updateUserData(session?.user, session?.user?.email);
         router.replace('/profile');
       }
       else{

@@ -1,13 +1,13 @@
 import { Alert, StyleSheet, Text, TouchableOpacity, View, Pressable } from 'react-native'
 import React from 'react'
 import ScreenWrapper from '@/components/ScreenWrapper'
-import { useAuth } from '@/context/AuthContext'
+import { useAuth } from '../../context/AuthContext'
 import { useRouter } from 'expo-router'
 import { Icon } from '@rneui/themed'
 import{ hp, wp} from '../../helpers/common'
 // import Icon from '@/assets/icons'
 import { theme } from '@/constants/theme'
-import { supabase } from '@/lib/supabase'
+import { supabase } from '../../lib/supabase'
 import Header from '../../components/header'
 import Avatar from '@/components/avatar'
 
@@ -16,11 +16,13 @@ const Profile = () => {
     const router = useRouter();
 
     const onLogout = async ()=>{
-      // setAuth(null);
-      const {error} = await supabase.auth.singOut();
+      console.log("logout");
+      setAuth(null);
+      const {error} = await supabase.auth.signOut();
       if(error){
         Alert.alert('Sign out', "Error signing out!")
       }
+      router.push('welcome')
     }
     const handleLogout = async ()=>{
       // show confirm modal
