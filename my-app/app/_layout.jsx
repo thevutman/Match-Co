@@ -1,14 +1,15 @@
-import { View, Text } from 'react-native'
 import React, { useEffect } from 'react'
 import { Stack, useRouter } from 'expo-router'
-import { AuthProvider, useAuth } from '../context/AuthContext'
+import { AuthProvider, useAuth } from '../contexts/AuthContext'
 import { supabase } from '@/lib/supabase'
-import FetchUbis from '../components/fetchUbicaciones'
 import { getUserData} from '../services/userService'
+import { MessageProvider } from '@/contexts/MessageContext'
 const _layout = () => {
   return (
     <AuthProvider>
-      <MainLayout />
+      <MessageProvider>
+        <MainLayout />
+      </MessageProvider>
     </AuthProvider>
   )
 }
@@ -22,8 +23,9 @@ const MainLayout = () => {
 
       if(session){
         setAuth(session?.user);
-        updateUserData(session?.user, session?.user?.email);
-        router.replace('/profile');
+        updateUserData(session?.user, session?.user.email);
+        router.replace('/homes');
+        // router.replace('/chat/12345');
       }
       else{
         setAuth(null);
@@ -34,8 +36,10 @@ const MainLayout = () => {
   
   const updateUserData = async (user, email) => {
     let res = await getUserData(user?.id);
+    console.log('got user data: ', res)
+
     if (res.success) setUserData({...res.data, email});
-    }
+  }
   
   return (
     <Stack

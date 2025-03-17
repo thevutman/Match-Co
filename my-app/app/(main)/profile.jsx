@@ -1,7 +1,7 @@
 import { Alert, StyleSheet, Text, TouchableOpacity, View, Pressable } from 'react-native'
 import React from 'react'
 import ScreenWrapper from '@/components/ScreenWrapper'
-import { useAuth } from '../../context/AuthContext'
+import { useAuth } from '../../contexts/AuthContext'
 import { useRouter } from 'expo-router'
 import { Icon } from '@rneui/themed'
 import{ hp, wp} from '../../helpers/common'
@@ -14,6 +14,8 @@ import Avatar from '@/components/avatar'
 const Profile = () => {
     const {user,setAuth} = useAuth();
     const router = useRouter();
+
+    console.log("user: " + user.data)
 
     const onLogout = async ()=>{
       console.log("logout");

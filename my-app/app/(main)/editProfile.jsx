@@ -85,7 +85,7 @@
  import Header from '../../components/header'
  import { Image } from 'expo-image'
  import Icon from '@/assets/icons'
- import { useAuth } from '@/context/AuthContext'
+ import { useAuth } from '@/contexts/AuthContext'
  import { getUserImageSrc, updateUser, uploadFile } from '@/services/userService'
 import Input from '@/components/Input'
 import Button from '@/components/Button'

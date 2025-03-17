@@ -1,7 +1,7 @@
 import { Alert,Button, StyleSheet,Text, View,Pressable } from "react-native"
 import React from 'react';
 import ScreenWrapper from "@/components/ScreenWrapper";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabase";
 import {header} from "@/components/header";
 import { theme } from "@/constants/theme";

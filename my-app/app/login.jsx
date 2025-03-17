@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     color: theme.colors.text
   },
   footer:{
-    flexDirecton: 'row',
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     gap: 5,
