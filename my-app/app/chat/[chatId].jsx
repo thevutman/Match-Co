@@ -1,17 +1,3 @@
-// import { View, Text } from 'react-native';
-// import { useLocalSearchParams } from 'expo-router';
-
-// export default function ChatScreen() {
-//   const { chatId } = useLocalSearchParams(); // Obtiene el ID del chat desde la URL
-
-//   return (
-//     <View>
-//       <Text>Chat ID: {chatId}</Text>
-//     </View>
-//   );
-// }
-
-
 import { useEffect, useState } from 'react';
 import { View, Text, FlatList, TextInput, Button } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
