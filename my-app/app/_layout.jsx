@@ -4,12 +4,15 @@ import { AuthProvider, useAuth } from '../contexts/AuthContext'
 import { supabase } from '@/lib/supabase'
 import { getUserData} from '../services/userService'
 import { MessageProvider } from '@/contexts/MessageContext'
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 const _layout = () => {
   return (
     <AuthProvider>
-      <MessageProvider>
-        <MainLayout />
-      </MessageProvider>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <MessageProvider>
+          <MainLayout />
+        </MessageProvider>
+      </GestureHandlerRootView>
     </AuthProvider>
   )
 }
@@ -24,7 +27,8 @@ const MainLayout = () => {
       if(session){
         setAuth(session?.user);
         updateUserData(session?.user, session?.user.email);
-        router.replace('/homes');
+        router.replace('/screens/MapScreen');
+        // router.replace('/profile');
         // router.replace('/chat/12345');
       }
       else{
