@@ -1,7 +1,7 @@
 import { Alert, Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { useRef, useState } from 'react'
 import ScreenWrapper from '@/components/ScreenWrapper'
-import {theme} from '../constants/theme'
+import {theme} from '../../constants/theme'
 import { Icon } from '@rneui/themed'
 import { StatusBar } from 'expo-status-bar'
 import BackButton from '@/components/BackButton'
@@ -9,7 +9,7 @@ import { useRouter } from 'expo-router'
 import { hp, wp } from '@/helpers/common'
 import Input from '@/components/Input'
 import Button from '@/components/Button'
-import { supabase } from '../lib/supabase'
+import { supabase } from '../../lib/supabase'
 
 
 
@@ -72,11 +72,11 @@ const Login = () => {
               secureTextEntry
               onChangeText={value=> passwordRef.current = value}
               />
-
-              <Text style={styles.forgotPassword}>
+              <Pressable onPress={()=> router.push('/recuperarContraseña')}>
+              <Text style={styles.forgotPassword} >
                 Forgot Password?
                </Text>
-             
+              </Pressable>
                <Button title={'Login'} loading={loading} onPress={onSubmit} /> 
         </View>
 

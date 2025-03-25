@@ -1,7 +1,7 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import ScreenWrapper from '@/components/ScreenWrapper'
-import { hp, wp } from '../helpers/common'
+import { hp, wp } from '../../helpers/common'
 import { StatusBar } from 'expo-status-bar'
 import { theme } from '@/constants/theme'
 import Button from '@/components/Button'
@@ -14,7 +14,7 @@ const welcome = () => {
       <StatusBar style = "dark" />
       <View style = {styles.container}>
 
-        <Image style={styles.welcomeImage} resizeMode='contain' source={require('../assets/images/welcome.png')} />
+        <Image style={styles.welcomeImage} resizeMode='contain' source={require('../../assets/images/welcome.png')} />
 
 
          <View style={{gap:20}}>
@@ -29,14 +29,14 @@ const welcome = () => {
             <Button
                 title="Getting Started"
                 buttonStyle={{marginHorizontal: wp(3)}}
-                onPress={()=> router.push('signUp')}
+                onPress={()=> router.push('/screens/signUp')}
             />
             
             <View style={styles.bottomTextContainer}>
               <Text style={[styles.loginText]}>
                   Already have an account!
               </Text>
-                  <Pressable onPress={()=> router.push('login')}>
+                  <Pressable onPress={()=> router.push('/screens/login')}>
                     <Text style={[styles.loginText,{color:theme.colors.primaryDark, fontWeight: theme.fonts.semibold}]}>
                       Login
                     </Text>

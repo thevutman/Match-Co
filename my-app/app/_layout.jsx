@@ -33,7 +33,7 @@ const MainLayout = () => {
       }
       else{
         setAuth(null);
-        router.replace('/welcome');
+        router.replace('/screens/welcome');
       }
     })
   }, []);

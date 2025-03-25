@@ -1,7 +1,7 @@
 import { Alert, Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { useRef, useState } from 'react'
 import ScreenWrapper from '@/components/ScreenWrapper'
-import {theme} from '../constants/theme'
+import {theme} from '../../constants/theme'
 import { Icon } from '@rneui/themed'
 import { StatusBar } from 'expo-status-bar'
 import BackButton from '@/components/BackButton'
@@ -9,7 +9,7 @@ import { useRouter } from 'expo-router'
 import { hp, wp } from '@/helpers/common'
 import Input from '@/components/Input'
 import Button from '@/components/Button'
-import { supabase } from '../lib/supabase'
+import { supabase } from '../../lib/supabase'
 
 
 const signUp = () => {
