@@ -1,2 +1,3 @@
 export const supabaseUrl = 'https://bzqokhkineilpmculdxr.supabase.co'
 export const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ6cW9raGtpbmVpbHBtY3VsZHhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ4MTYyMzgsImV4cCI6MjA1MDM5MjIzOH0.1GXPeae9loaXda65MTuUTgYwcHNa7J0SN8VQH1fQhrg'
+export { theme } from './theme';

@@ -4,171 +4,190 @@ import ScreenWrapper from '@/components/ScreenWrapper'
 import { useAuth } from '../../contexts/AuthContext'
 import { useRouter } from 'expo-router'
 import { Icon } from '@rneui/themed'
-import{ hp, wp} from '../../helpers/common'
-// import Icon from '@/assets/icons'
+import { hp, wp } from '../../helpers/common'
 import { theme } from '@/constants/theme'
 import { supabase } from '../../lib/supabase'
 import Header from '../../components/header'
 import Avatar from '@/components/avatar'
 
 const Profile = () => {
-    const {user,setAuth} = useAuth();
+    const { user, setAuth } = useAuth();
     const router = useRouter();
 
-    console.log("user: " + user.data)
-
-    const onLogout = async ()=>{
-      console.log("logout");
-      setAuth(null);
-      const {error} = await supabase.auth.signOut();
-      if(error){
-        Alert.alert('Sign out', "Error signing out!")
-      }
-      router.push('welcome')
-    }
-    const handleLogout = async ()=>{
-      // show confirm modal
-      Alert.alert('Confirm', "Are you sure you want to log out?",[
-        {
-          text: 'Cencel',
-          onPress: ()=> console.log('modal cancelled'),
-          style: 'cancel'
-        },
-        {
-          text: 'Logout',
-          onPress: ()=> onLogout(),
-          style: 'destructive'
+    const onLogout = async () => {
+        try {
+            setAuth(null);
+            const { error } = await supabase.auth.signOut();
+            if (error) {
+                Alert.alert('Error', "Error al cerrar sesión. Por favor, intenta de nuevo.");
+            } else {
+                router.replace('/auth/welcome');
+            }
+        } catch (error) {
+            Alert.alert('Error', "Error inesperado al cerrar sesión.");
         }
-      ])
     }
-  return (
-    <ScreenWrapper bg="white">
-      <UserHeader user={user} router={router} handleLogout={handleLogout} />
-    </ScreenWrapper>
-  )
+
+    const handleLogout = () => {
+        Alert.alert(
+            'Confirmar', 
+            "¿Estás seguro que deseas cerrar sesión?",
+            [
+                {
+                    text: 'Cancelar',
+                    style: 'cancel'
+                },
+                {
+                    text: 'Cerrar Sesión',
+                    onPress: onLogout,
+                    style: 'destructive'
+                }
+            ]
+        );
+    }
+
+    if (!user) {
+        return (
+            <ScreenWrapper bg="white">
+                <View style={styles.errorContainer}>
+                    <Text style={styles.errorText}>Error al cargar el perfil</Text>
+                </View>
+            </ScreenWrapper>
+        );
+    }
+
+    return (
+        <ScreenWrapper bg="white">
+            <UserHeader user={user} router={router} handleLogout={handleLogout} />
+        </ScreenWrapper>
+    );
 }
 
-const UserHeader = ({user, router, handleLogout}) => {
-    return(
-        <View style={{flex:1, backgroundColor:'White', paddingHorizontal: wp(4)}}>
+const UserHeader = ({ user, router, handleLogout }) => {
+    return (
+        <View style={styles.container}>
             <View>
-              <Header title="profile" mb={30}/>
-              <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-                  <Icon name="logout" color={theme.colors.rose}/>
-              </TouchableOpacity>
+                <Header title="Perfil" mb={30}/>
+                <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+                    <Icon name="logout" color={theme.colors.rose}/>
+                </TouchableOpacity>
             </View>
 
-            <View syle={styles.container}>
-              <View style={{gap:15}}>
-                <View style={styles.avatarContainer}>
-                   <Avatar
-                    uri={user?.image}
-                    size={hp(12)}
-                    rounded={theme.radius.xxl*1.4}
-                  /> 
-                  <Pressable style={styles.editIcon} onPress={()=> router.push('editProfile')}>
-                      <Icon name="edit" strokeWidth={2.5} size={20}/>
-                  </Pressable>
-                </View>
-                {/* username and address */}
-                <View style={{alignItems: 'center', gap: 4}}>
-                    <Text style={styles.userName}>{user && user.name}</Text>
-                    <Text style={styles.infoText}>{user && user.address}</Text>
-                </View>
-                {/* email, phone, bio */}
-                <View style={{gap:10}}>
-                    <View style={styles.info}>
-                      <Icon name="mail" size={20} color={theme.colors.textLight}/>
-                      <Text style={styles.infoText}>
-                        {user && user.email}
-                      </Text>
+            <View style={styles.contentContainer}>
+                <View style={styles.avatarSection}>
+                    <View style={styles.avatarContainer}>
+                        <Avatar
+                            uri={user.image}
+                            size={hp(12)}
+                            rounded={theme.radius.xxl * 1.4}
+                        />
+                        <Pressable 
+                            style={styles.editIcon} 
+                            onPress={() => router.push('/screens/editProfile')}
+                        >
+                            <Icon name="edit" size={20}/>
+                        </Pressable>
                     </View>
-                    {
-                      user && user.phoneNumber && (
-                        <View style={styles.info}>
-                          <Icon name="call" size={20} color={theme.colors.textLight}/>
-                          <Text style={styles.infoText}>
-                            {user && user.phoneNumber}
-                          </Text>
-                        </View>
-                      )
-                    }
-                    {
-                       user && user.bio && (
-                            <Text style={styles.infoText}>{user.bio}</Text>
-                       )
-                    }
+                    <View style={styles.userInfo}>
+                        <Text style={styles.userName}>{user.name}</Text>
+                        {user.address && <Text style={styles.infoText}>{user.address}</Text>}
+                    </View>
                 </View>
-                
-              </View>
 
+                <View style={styles.detailsSection}>
+                    <View style={styles.infoRow}>
+                        <Icon name="mail" size={20} color={theme.colors.textLight}/>
+                        <Text style={styles.infoText}>{user.email}</Text>
+                    </View>
+                    {user.phone_number && (
+                        <View style={styles.infoRow}>
+                            <Icon name="call" size={20} color={theme.colors.textLight}/>
+                            <Text style={styles.infoText}>{user.phone_number}</Text>
+                        </View>
+                    )}
+                    {user.bio && (
+                        <View style={styles.bioContainer}>
+                            <Text style={styles.infoText}>{user.bio}</Text>
+                        </View>
+                    )}
+                </View>
             </View>
         </View>
-    )
+    );
 }
 
-export default Profile
+export default Profile;
 
 const styles = StyleSheet.create({
-  container:{
-    flex:1,
-  },
-  headerContainer: {
-    marginHorizontal: wp(4),
-    marginBottom: 20
-  },
-  headerShape: {
-    width: wp(100),
-    height: wp(20)
-  },
-  avatarContainer: {
-    height: hp(12),
-    width: hp(12),
-    alignSelf: 'center'
-  },
-  editIcon: {
-    position: 'absolute',
-    bottom: 0,
-    right: -12,
-    padding: 7,
-    borderRadius: 50,
-    backgroundColor: 'white',
-    shadowColor: theme.colors.textLight,
-    shadowOffset: {width: 0, height: 4},
-    shadowOpacity: 0.4,
-    shadowRadius: 5,
-    elevation: 7
-  },
-  userName: {
-    fontSize: hp(3),
-    fontWeight: '500',
-    color: theme.colors.textDark
-  },
-  info: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-  },
-  infoText: {
-    fontSize: hp(1.6),
-    fontWeight: '500',
-    color: theme.colors.textLight
-  },
-
-  logoutButton: {
-    position: 'absolute',
-    right: 0,
-    padding: 5,
-    borderRadius: theme.radius.sm,
-    backgroundColor: '#fee2e2'
-  },
-  listStyle: {
-    paddingHorizontal: wp(4),
-    paddingBottom: 30,
-  },
-  noPosts: {
-    fontSize: hp(2),
-    textAlign: 'center',
-    color: theme.colors.text
-  }
-})
+    container: {
+        flex: 1,
+        backgroundColor: 'white',
+        paddingHorizontal: wp(4)
+    },
+    contentContainer: {
+        gap: 15
+    },
+    avatarSection: {
+        alignItems: 'center',
+        gap: 15
+    },
+    avatarContainer: {
+        height: hp(12),
+        width: hp(12),
+        alignSelf: 'center'
+    },
+    userInfo: {
+        alignItems: 'center',
+        gap: 4
+    },
+    editIcon: {
+        position: 'absolute',
+        bottom: 0,
+        right: -12,
+        padding: 7,
+        borderRadius: 50,
+        backgroundColor: 'white',
+        shadowColor: theme.colors.textLight,
+        shadowOffset: {width: 0, height: 4},
+        shadowOpacity: 0.4,
+        shadowRadius: 5,
+        elevation: 7
+    },
+    userName: {
+        fontSize: hp(3),
+        fontWeight: '500',
+        color: theme.colors.textDark
+    },
+    detailsSection: {
+        gap: 10
+    },
+    infoRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 10,
+    },
+    bioContainer: {
+        marginTop: 5
+    },
+    infoText: {
+        fontSize: hp(1.6),
+        fontWeight: '500',
+        color: theme.colors.textLight
+    },
+    logoutButton: {
+        position: 'absolute',
+        right: 0,
+        padding: 5,
+        borderRadius: theme.radius.sm,
+        backgroundColor: '#fee2e2'
+    },
+    errorContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    errorText: {
+        fontSize: hp(2),
+        color: theme.colors.error
+    }
+});
