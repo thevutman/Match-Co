@@ -5,7 +5,7 @@ import { theme } from '@/constants/theme'
 
 const Input = (props) => {
   return (
-    <View style={[styles.container, props.containerStyle && props.containerStyles]}>
+    <View style={[styles.container, props.containerStyle && props.containerStyle]}>
       {
         props.icon && props.icon
       }  

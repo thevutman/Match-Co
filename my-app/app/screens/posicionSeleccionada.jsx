@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import Posicion from '../assets/icons/poisicionSelec';
+import Posicion from '../../assets/icons/poisicionSelec';
 
 const posicionSeleccionada = () => {
   return (
